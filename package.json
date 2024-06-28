@@ -1,0 +1,24 @@
+{
+  "name": "authzen.guide",
+  "version": "1.0.0",
+  "description": "Source code for the AuthZEN Guide website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidjbrossard/authzen.guide.git"
+  },
+  "keywords": [
+    "authorization"
+  ],
+  "author": "David Brossard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidjbrossard/authzen.guide/issues"
+  },
+  "homepage": "https://github.com/davidjbrossard/authzen.guide#readme",
+  "dependencies": {
+  }
+}
