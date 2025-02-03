@@ -23,11 +23,13 @@ body {font-size:16px;}
   </div>
   <div class="w3-bar-block">
     <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a> 
-    <a href="https://openid.net/wg/authzen/" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">OpenID AuthZEN WG</a> 
-    <a href="https://github.com/openid/authzen" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">OpenID AuthZEN Github</a> 
     <a href="#interop" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Identiverse 2024 Interop</a> 
+    <a href="#why" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Why AuthZEN</a> 
+    <a href="#manifesto" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">The Authorization Manifesto</a> 
     <!--<a href="#packages" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Packages</a> -->
     <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Contact</a>
+    <a href="https://openid.net/wg/authzen/" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">OpenID AuthZEN WG</a> 
+    <a href="https://github.com/openid/authzen" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">OpenID AuthZEN Github</a> 
   </div>
 </nav>
 
@@ -81,8 +83,8 @@ body {font-size:16px;}
     <iframe src="https://www.slideshare.net/slideshow/embed_code/key/2Qv6PR2vSh4xXc?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
   </div>
   
-  <!-- Designers -->
-  <div class="w3-container" id="designers" style="margin-top:75px">
+  <!-- Why AuthZEN -->
+  <div class="w3-container" id="why" style="margin-top:75px">
     <h1 class="w3-xxxlarge w3-text-red"><b>Why AuthZEN?</b></h1>
     <hr style="width:50px;border:5px solid red" class="w3-round">
     <p> The purpose of this WG is to explore how to improve the deployability, scalability and interoperability of dynamic, 
@@ -91,85 +93,43 @@ body {font-size:16px;}
       across their entire application estate, including both SaaS services and internally developed applications (whether 
       they be on-prem or in the Cloud).</p>
   </div>
-
-  <!-- The Team
-  <div class="w3-row-padding w3-grayscale">
-    <div class="w3-col m4 w3-margin-bottom">
-      <div class="w3-light-grey">
-        <img src="/w3images/team2.jpg" alt="John" style="width:100%">
-        <div class="w3-container">
-          <h3>John Doe</h3>
-          <p class="w3-opacity">CEO & Founder</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-        </div>
-      </div>
-    </div>
-    <div class="w3-col m4 w3-margin-bottom">
-      <div class="w3-light-grey">
-        <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
-        <div class="w3-container">
-          <h3>Jane Doe</h3>
-          <p class="w3-opacity">Designer</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-        </div>
-      </div>
-    </div>
-    <div class="w3-col m4 w3-margin-bottom">
-      <div class="w3-light-grey">
-        <img src="/w3images/team3.jpg" alt="Mike" style="width:100%">
-        <div class="w3-container">
-          <h3>Mike Ross</h3>
-          <p class="w3-opacity">Architect</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-        </div>
-      </div>
-    </div>
-  </div>-->
-
-  <!-- Packages / Pricing Tables 
-  <div class="w3-container" id="packages" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-red"><b>Packages.</b></h1>
+  
+  <!-- AuthZEN Externalized Authorization Call To Arms -->
+  <div class="w3-container" id="why" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-red"><b>The Authorization Manifesto</b></h1>
+    <h2 class="w3-xlarge w3-text-red">Call to Arms: Championing Externalized, Fine-Grained Authorization</h2>
     <hr style="width:50px;border:5px solid red" class="w3-round">
-    <p>Some text our prices. Lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure</p>
+    <p>
+      Fellow Application Architects and Developers,
+      In our rapidly evolving digital landscape, the need for robust and adaptive security measures has never been more pressing. As custodians of software integrity and user trust, we must rise to the challenge of modern application development by embracing externalized, fine-grained authorization.
+    </p>
+    <h3>Why This Matters</h3>
+    <ul>
+      <li><em>Enhanced Security:</em> Traditional role-based access control (RBAC) models often fall short in meeting the nuanced needs of today's complex applications. Fine-grained authorization enables us to define precise access controls based on attributes and contextual data, reducing vulnerabilities and mitigating insider threats.</li>
+      <li><em>Agility and Scalability:</em> As applications grow and evolve, so too must their security frameworks. Externalizing authorization allows for centralized management, making it easier to update and maintain policies without disrupting the application's core functionality. This agility ensures our systems remain resilient and adaptable to changing business requirements.</li>
+      <li><em>Compliance and Governance:</em> In an era of stringent regulatory requirements, maintaining compliance is paramount. Fine-grained authorization provides the granularity needed to enforce data privacy and protection regulations, ensuring that access controls are aligned with legal mandates and audit trails are robust.</li>
+      <li><em>User Experience:</em> By implementing fine-grained authorization, we can deliver a more tailored and seamless user experience. Users are granted access only to what they need, reducing clutter and confusion while enhancing overall satisfaction and productivity.</li>
+    </ul>
+    <h3>Taking Action</h3>
+    <p>
+    It's time to move beyond the limitations of legacy access control models and embrace the future of secure application development. Here's how you can get started:</p>
+    <ul>
+      <li>Educate and Advocate: Share the benefits of externalized, fine-grained authorization with your teams and stakeholders. Highlight the security, agility, compliance, and user experience improvements it offers.</li>
+      <li>Adopt Best Practices: Implement best practices for externalized authorization, such as attribute-based access control (ABAC) and policy-based access control (PBAC). Leverage industry standards and frameworks to guide your efforts.</li>
+      <li>Invest in Tools and Training: Equip your teams with the tools and knowledge they need to effectively manage and implement fine-grained authorization. Continuous learning and upskilling are essential in staying ahead of security challenges.</li>
+      <li>Collaborate and Innovate: Foster a culture of collaboration and innovation within your organization. Encourage cross-functional teams to work together in designing and implementing secure, user-centric applications.</li>
+      <li>Adopt OpenID AuthZEN: As a first step towards a successful externalized authorization program, consider adopting OpenID AuthZEN. This powerful tool simplifies the implementation of fine-grained authorization by providing a robust and scalable framework. By leveraging OpenID AuthZEN, you can streamline the integration of attribute-based access controls and ensure your applications are both secure and flexible.</li>
+    </ul>
+    <h3>Join the Movement</h3>
+    <p>
+      As we navigate the complexities of modern application development, our commitment to robust security practices must remain unwavering. Let us unite as a community of forward-thinking architects and developers, championing the adoption of externalized, fine-grained authorization for a safer, more resilient digital future.
+      Together, we can build applications that not only meet the demands of today but also anticipate the challenges of tomorrow. Join the movement and lead the charge in redefining security standards in our industry.
+    </p>
+    <p>
+    Stay Secure, [Your Name] [Your Role] [Your Organization]
+    </p>
   </div>
 
-  <div class="w3-row-padding">
-    <div class="w3-half w3-margin-bottom">
-      <ul class="w3-ul w3-light-grey w3-center">
-        <li class="w3-dark-grey w3-xlarge w3-padding-32">Basic</li>
-        <li class="w3-padding-16">Floorplanning</li>
-        <li class="w3-padding-16">10 hours support</li>
-        <li class="w3-padding-16">Photography</li>
-        <li class="w3-padding-16">20% furniture discount</li>
-        <li class="w3-padding-16">Good deals</li>
-        <li class="w3-padding-16">
-          <h2>$ 199</h2>
-          <span class="w3-opacity">per room</span>
-        </li>
-        <li class="w3-light-grey w3-padding-24">
-          <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
-        </li>
-      </ul>
-    </div>
-        
-    <div class="w3-half">
-      <ul class="w3-ul w3-light-grey w3-center">
-        <li class="w3-red w3-xlarge w3-padding-32">Pro</li>
-        <li class="w3-padding-16">Floorplanning</li>
-        <li class="w3-padding-16">50 hours support</li>
-        <li class="w3-padding-16">Photography</li>
-        <li class="w3-padding-16">50% furniture discount</li>
-        <li class="w3-padding-16">GREAT deals</li>
-        <li class="w3-padding-16">
-          <h2>$ 249</h2>
-          <span class="w3-opacity">per room</span>
-        </li>
-        <li class="w3-light-grey w3-padding-24">
-          <button class="w3-button w3-red w3-padding-large w3-hover-black">Sign Up</button>
-        </li>
-      </ul>
-    </div>
-  </div>-->
   
   <!-- Contact -->
   <div class="w3-container" id="contact" style="margin-top:75px">
