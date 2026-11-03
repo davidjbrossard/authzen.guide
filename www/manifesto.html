@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Authorization Manifesto: Externalized, Fine-Grained Authorization</title>
-  <meta name="description" content="A call to arms for application architects and developers to adopt externalized, fine-grained authorization and the OpenID AuthZEN standard.">
+  <title>The Authorization Manifesto: Externalize, Standardize, Defend in Depth</title>
+  <meta name="description" content="Why authorization must be externalized, fine-grained and standardized: NIST SP 800-162 ABAC, defense in depth, OpenID AuthZEN and agentic AI.">
   <link rel="canonical" href="https://authzen.guide/manifesto">
   <meta name="author" content="David Brossard">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -13,14 +13,14 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="AuthZEN.guide">
   <meta property="og:title" content="The Authorization Manifesto">
-  <meta property="og:description" content="A call to arms for application architects and developers to adopt externalized, fine-grained authorization and the OpenID AuthZEN standard.">
+  <meta property="og:description" content="Why authorization must be externalized, fine-grained and standardized: NIST SP 800-162 ABAC, defense in depth, OpenID AuthZEN and agentic AI.">
   <meta property="og:url" content="https://authzen.guide/manifesto">
   <meta property="og:image" content="https://authzen.guide/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Authorization Manifesto">
-  <meta name="twitter:description" content="A call to arms for application architects and developers to adopt externalized, fine-grained authorization and the OpenID AuthZEN standard.">
+  <meta name="twitter:description" content="Why authorization must be externalized, fine-grained and standardized: NIST SP 800-162 ABAC, defense in depth, OpenID AuthZEN and agentic AI.">
   <meta name="twitter:image" content="https://authzen.guide/assets/og-image.png">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -50,7 +50,7 @@
     {
       "@type": "TechArticle",
       "headline": "The Authorization Manifesto",
-      "description": "A call to arms for application architects and developers to adopt externalized, fine-grained authorization and the OpenID AuthZEN standard.",
+      "description": "Why authorization must be externalized, fine-grained and standardized: NIST SP 800-162 ABAC, defense in depth, OpenID AuthZEN and agentic AI.",
       "author": {
         "@type": "Person",
         "@id": "https://authzen.guide/#david-brossard",
@@ -110,47 +110,119 @@
       <hr class="w3-round rule">
     </div>
 
-    <section class="w3-container section" id="call">
-      <h2 class="w3-xxlarge w3-text-red"><b>Call to arms: championing externalized, fine-grained authorization</b></h2>
+    <div class="w3-container">
+      <p class="lead">We standardized authentication years ago. We never did the same for authorization, and it
+        shows. Here is why I think that has to change, and what I'd like you to do about it.</p>
+    </div>
 
-      <p>Fellow application architects and developers,</p>
-      <p>Our digital landscape changes fast, and the need for robust, adaptive security has never been more
-        pressing. As custodians of software integrity and user trust, we must meet the challenge of modern
-        application development by embracing externalized, fine-grained authorization.</p>
-      <h3>Why this matters</h3>
+    <section class="w3-container section" id="login">
+      <h2 class="w3-xxlarge w3-text-red"><b>We fixed login. We never fixed access.</b></h2>
+
+      <p>Twenty years ago every application had its own login page and its own user table. SAML, then OAuth and
+        OpenID Connect, put an end to that. Today nobody builds their own login. You plug in an identity provider
+        and move on.</p>
+      <p>Authorization never got that treatment. Open any codebase and you'll find access logic scattered across
+        <code>if</code> statements, SQL <code>WHERE</code> clauses, API gateway configuration and a roles table
+        that someone created a decade ago. Every app does it differently. Ask who can see what across the
+        application estate and the honest answer is usually "it depends which app you're asking about". Ask for an
+        audit trail and you get a spreadsheet.</p>
+      <p>That isn't a tooling problem. It's an architecture problem.</p>
+
+    </section>
+
+    <section class="w3-container section" id="nist">
+      <h2 class="w3-xxlarge w3-text-red"><b>Roles were never going to be enough</b></h2>
+
+      <p>Role-based access control (RBAC) works until it doesn't. Try expressing "a manager can approve expense
+        reports for their own team, up to their approval limit, unless the expense was filed from a sanctioned
+        country" with roles alone. You end up with role explosion: thousands of roles nobody can explain, and
+        access reviews nobody can finish.</p>
+      <p>NIST worked this out over a decade ago. <a href="https://csrc.nist.gov/pubs/sp/800/162/upd2/final">NIST SP
+        800-162</a>, <em>Guide to Attribute Based Access Control (ABAC) Definition and Considerations</em>, published in
+        2014, defined attribute-based access control: decisions based on attributes of the subject, the action,
+        the resource and the environment, evaluated against policy. It also formalized the architecture we still
+        use: a policy enforcement point (PEP) intercepts the request and a policy decision point (PDP) makes the
+        call. XACML had the same model. ALFA made the policies readable by humans.</p>
+      <p>So the theory has been settled for a while. What was missing was a standard way for the PEP to talk to
+        the PDP. That is what <a href="/">OpenID AuthZEN</a> fixes.</p>
+
+    </section>
+
+    <section class="w3-container section" id="principles">
+      <h2 class="w3-xxlarge w3-text-red"><b>Externalize, then standardize</b></h2>
+
+      <p>My position hasn't changed in years. It comes down to three things.</p>
+      <ol>
+        <li><strong>Take authorization out of the code.</strong> Policies belong outside the application, where
+          security, compliance and business owners can read them, change them and audit them without a release
+          cycle.</li>
+        <li><strong>Make it fine-grained and dynamic.</strong> Decide at runtime, with the context available at that
+          moment, not at login time with whatever was stuffed into a token.</li>
+        <li><strong>Standardize the interface.</strong> With AuthZEN, an application, API gateway or identity
+          provider asks one question: can this subject perform this action on this resource in this context? Any
+          compliant PDP answers. You can swap engines without rewriting apps. No lock-in, and yes, that includes
+          lock-in to us.</li>
+      </ol>
+
+    </section>
+
+    <section class="w3-container section" id="defense-in-depth">
+      <h2 class="w3-xxlarge w3-text-red"><b>Defense in depth, one policy</b></h2>
+
+      <p>Security teams rightly insist on defense in depth: any single control eventually fails, so you layer them.
+        For authorization, that means checking at more than one place:</p>
       <ul>
-        <li><strong>Enhanced security:</strong> Traditional role-based access control (RBAC) models often fall short
-          of the nuanced needs of today's complex applications. Fine-grained authorization defines precise
-          access controls based on attributes and contextual data, which reduces vulnerabilities and mitigates insider
-          threats.</li>
-        <li><strong>Agility and scalability:</strong> As applications grow and evolve, their security frameworks must
-          evolve too. Externalized authorization allows centralized management, so policies can be updated and
-          maintained without disrupting the application's core functionality.</li>
-        <li><strong>Compliance and governance:</strong> Fine-grained authorization provides the granularity needed to
-          enforce data privacy and protection regulations, so access controls align with legal mandates and
-          audit trails are robust.</li>
-        <li><strong>User experience:</strong> Users are granted access only to what they need, which reduces clutter and
-          confusion and improves productivity.</li>
+        <li><strong>At the edge.</strong> The API gateway rejects calls that are obviously out of bounds.</li>
+        <li><strong>In the application or API.</strong> Is Alice allowed to approve <em>this</em> payment?</li>
+        <li><strong>At the data layer.</strong> Only return the records and documents the caller is entitled to,
+          which is what the AuthZEN <a href="/api#search">Search API</a> is for.</li>
       </ul>
-      <h3>Taking action</h3>
+      <p>The problem has always been that each layer had its own rules, in its own format, maintained by a different
+        team. They drift. The gateway says yes, the app says no and the database never asks. With AuthZEN every
+        layer is a PEP calling the same PDP with the same policies. You get layered enforcement with a single source
+        of truth, and one audit log that shows every decision made at every layer.</p>
+
+    </section>
+
+    <section class="w3-container section" id="agentic-ai">
+      <h2 class="w3-xxlarge w3-text-red"><b>Agentic AI makes this urgent</b></h2>
+
+      <p>Everything above was true before anyone had heard of an LLM. Agents just remove the last excuses.</p>
+      <p>An AI agent is a new kind of subject. It acts on behalf of a user, chains tool calls together, decides at
+        runtime which APIs to call and does all of it at machine speed. You cannot hard-code permissions for a path
+        you can't predict. And you certainly shouldn't let the model decide what it is allowed to do. A prompt
+        injection can talk an LLM into almost anything. It cannot talk a PDP out of a deny.</p>
+      <p>The good news is that the PEP/PDP model maps onto agentic architectures almost one to one:</p>
       <ul>
-        <li><strong>Educate and advocate:</strong> Share the benefits of externalized, fine-grained authorization with
-          your teams and stakeholders.</li>
-        <li><strong>Adopt best practices:</strong> Use attribute-based (ABAC) and policy-based (PBAC) access control,
-          guided by industry standards.</li>
-        <li><strong>Invest in tools and training:</strong> Give your teams the tools and knowledge they need to
-          implement fine-grained authorization.</li>
-        <li><strong>Collaborate and innovate:</strong> Encourage cross-functional teams to design secure, user-centric
-          applications together.</li>
-        <li><strong>Adopt OpenID AuthZEN:</strong> As a first step towards a successful externalized authorization
-          program, standardize how your applications call your authorization service with the
-          <a href="/api">AuthZEN Authorization API</a>.</li>
+        <li>The agent <em>and</em> the user it acts for are the subject. Both matter: an agent should never be able
+          to do more than the person who delegated to it.</li>
+        <li>Each tool call or MCP request is an action on a resource.</li>
+        <li>The MCP server, or the gateway in front of it, is the PEP.</li>
+        <li>The PDP makes a deterministic, auditable decision outside the model.</li>
+        <li>Retrieval pipelines use Search to fetch only what the user is entitled to see, before anything reaches
+          the prompt.</li>
       </ul>
-      <h3>Join the movement</h3>
-      <p>Let us unite as a community of forward-thinking architects and developers and champion externalized,
-        fine-grained authorization for a safer, more resilient digital future.
-        <a href="https://openid.net/wg/authzen/">Join the OpenID AuthZEN Working Group</a>.</p>
-      <p><em>Stay secure,<br>David Brossard, CTO Axiomatics and Co-chair, OpenID AuthZEN</em></p>
+      <p>The AuthZEN working group is already on it: the COAZ-MCP binding, currently a working group draft, maps MCP
+        requests to the Authorization API.</p>
+
+    </section>
+
+    <section class="w3-container section" id="ask">
+      <h2 class="w3-xxlarge w3-text-red"><b>What I'm asking you to do</b></h2>
+
+      <ul>
+        <li><strong>Stop writing authorization logic in application code.</strong> Every new
+          <code>if (user.role == "admin")</code> is technical debt with a security hole attached.</li>
+        <li><strong>Read NIST SP 800-162.</strong> It will change how you think about access control.</li>
+        <li><strong>Ask your vendors.</strong> When you buy or build an API gateway, an IdP, an agent platform or an
+          MCP server, ask whether it speaks AuthZEN. If it doesn't, ask when it will.</li>
+        <li><strong>Put a PDP behind it.</strong> Ours, someone else's or an open-source one. Thanks to AuthZEN, it's
+          a decision you can revisit later. See the <a href="/implementations">implementations</a>.</li>
+        <li><strong>Come and help.</strong> The <a href="https://openid.net/wg/authzen/">OpenID AuthZEN Working
+          Group</a> is open to anyone who signs the contribution agreement. We need more implementers and more
+          real-world use cases.</li>
+      </ul>
+      <p>David Brossard<br>CTO, Axiomatics · Co-chair, OpenID AuthZEN Working Group</p>
 
     </section>
 
