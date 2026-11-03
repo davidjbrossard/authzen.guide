@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AuthZEN API Reference: Evaluation, Batch &amp; Search with JSON Examples</title>
+  <meta name="description" content="OpenID AuthZEN Authorization API 1.0 reference: evaluation, batch evaluations, subject/resource/action search, PDP discovery, with JSON request and response examples.">
+  <link rel="canonical" href="https://authzen.guide/api">
+  <meta name="author" content="David Brossard">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="theme-color" content="#f44336">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AuthZEN.guide">
+  <meta property="og:title" content="AuthZEN API reference with JSON examples">
+  <meta property="og:description" content="OpenID AuthZEN Authorization API 1.0 reference: evaluation, batch evaluations, subject/resource/action search, PDP discovery, with JSON request and response examples.">
+  <meta property="og:url" content="https://authzen.guide/api">
+  <meta property="og:image" content="https://authzen.guide/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AuthZEN API reference with JSON examples">
+  <meta name="twitter:description" content="OpenID AuthZEN Authorization API 1.0 reference: evaluation, batch evaluations, subject/resource/action search, PDP discovery, with JSON request and response examples.">
+  <meta name="twitter:image" content="https://authzen.guide/assets/og-image.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/w3.css">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AuthZEN.guide",
+          "item": "https://authzen.guide/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AuthZEN API reference with JSON examples",
+          "item": "https://authzen.guide/api"
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "headline": "AuthZEN API reference: endpoints and JSON examples",
+      "description": "OpenID AuthZEN Authorization API 1.0 reference: evaluation, batch evaluations, subject/resource/action search, PDP discovery, with JSON request and response examples.",
+      "author": {
+        "@type": "Person",
+        "@id": "https://authzen.guide/#david-brossard",
+        "name": "David Brossard"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://authzen.guide/#org",
+        "name": "Axiomatics"
+      },
+      "dateModified": "2026-11-03",
+      "mainEntityOfPage": "https://authzen.guide/api",
+      "isPartOf": {
+        "@id": "https://authzen.guide/#website"
+      },
+      "image": "https://authzen.guide/assets/og-image.png"
+    },
+    {
+      "@type": "HowTo",
+      "name": "Call an AuthZEN PDP",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Discover the PDP",
+          "text": "GET /.well-known/authzen-configuration to find the access_evaluation_endpoint."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Build the request",
+          "text": "Create a JSON body with subject (type, id), action (name), resource (type, id) and optional context."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "POST the request",
+          "text": "POST it to /access/v1/evaluation with Content-Type: application/json."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Enforce the decision",
+          "text": "Allow the operation if decision is true, otherwise deny it."
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+
+<body>
+
+  <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;"
+    id="mySidebar" aria-label="Main">
+    <br>
+    <button type="button" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft"
+      style="width:100%;font-size:22px">Close Menu</button>
+    <div class="w3-container">
+      <p class="w3-padding-64 w3-xlarge"><a href="/" style="text-decoration:none"><b>AuthZEN.guide</b></a></p>
+    </div>
+    <div class="w3-bar-block">
+      <a href="/" class="w3-bar-item w3-button w3-hover-white">Home</a>
+      <a href="/api" aria-current="page" class="w3-bar-item w3-button w3-hover-white">API reference &amp; examples</a>
+      <a href="/implementations" class="w3-bar-item w3-button w3-hover-white">Implementations</a>
+      <a href="/compare" class="w3-bar-item w3-button w3-hover-white">AuthZEN vs XACML, OPA, Cedar</a>
+      <a href="/#faq" class="w3-bar-item w3-button w3-hover-white">FAQ</a>
+      <a href="/manifesto" class="w3-bar-item w3-button w3-hover-white">Authorization Manifesto</a>
+      <a href="https://openid.net/specs/authorization-api-1_0.html" class="w3-bar-item w3-button w3-hover-white">Spec (1.0 Final)</a>
+      <a href="https://github.com/openid/authzen" class="w3-bar-item w3-button w3-hover-white">AuthZEN on GitHub</a>
+    </div>
+  </nav>
+
+  <header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
+    <button type="button" class="w3-button w3-red w3-margin-right" onclick="w3_open()" aria-label="Open menu">☰</button>
+    <span>AuthZEN.guide</span>
+  </header>
+
+  <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu"
+    id="myOverlay"></div>
+
+  <main class="w3-main">
+    <div class="w3-container" style="margin-top:80px">
+      <h1 class="w3-xxxlarge"><b>AuthZEN API reference: endpoints and JSON examples</b></h1>
+      <p class="updated">By <a href="/#about">David Brossard</a> · Last updated <time datetime="2026-11-03">3 November 2026</time></p>
+      <hr class="w3-round rule">
+    </div>
+
+    <div class="w3-container">
+      <p class="lead">This page summarizes the <a href="https://openid.net/specs/authorization-api-1_0.html">OpenID
+        AuthZEN Authorization API 1.0</a> (Final Specification, January 2026) with copy-paste JSON examples. All calls
+        are HTTPS <code>POST</code> with <code>Content-Type: application/json</code>. A deny is a normal
+        <code>200</code> response with <code>"decision": false</code>; HTTP 4xx/5xx codes mean transport or request
+        errors.</p>
+      <p>On this page: <a href="#model">Information model</a> · <a href="#evaluation">Access Evaluation</a> ·
+        <a href="#evaluations">Access Evaluations (batch)</a> · <a href="#search">Search APIs</a> ·
+        <a href="#metadata">PDP metadata &amp; discovery</a> · <a href="#try">Try it</a></p>
+    </div>
+
+    <section class="w3-container section" id="model">
+      <h2 class="w3-xxlarge w3-text-red"><b>Information model: subject, action, resource, context</b></h2>
+
+      <div class="table-wrap">
+        <table class="w3-table-all">
+          <thead><tr><th>Element</th><th>Required fields</th><th>Optional</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td><code>subject</code></td><td><code>type</code>, <code>id</code></td><td><code>properties</code></td><td><code>{"type":"user","id":"alice@example.com","properties":{"department":"Sales"}}</code></td></tr>
+            <tr><td><code>action</code></td><td><code>name</code></td><td><code>properties</code></td><td><code>{"name":"can_read"}</code></td></tr>
+            <tr><td><code>resource</code></td><td><code>type</code>, <code>id</code></td><td><code>properties</code></td><td><code>{"type":"account","id":"123"}</code></td></tr>
+            <tr><td><code>context</code></td><td>none (the whole object is optional)</td><td>any</td><td><code>{"time":"1985-10-26T01:22-07:00"}</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The decision response carries a boolean <code>decision</code> (required) and an optional
+        <code>context</code> object. The PDP can use <code>context</code> to return reasons, advice or obligations,
+        or hints such as a step-up authentication requirement.</p>
+
+    </section>
+
+    <section class="w3-container section" id="evaluation">
+      <h2 class="w3-xxlarge w3-text-red"><b>Access Evaluation API</b></h2>
+
+      <p>Default path: <code>/access/v1/evaluation</code>. One question, one decision.</p>
+<pre><code>POST /access/v1/evaluation HTTP/1.1
+Host: pdp.example.com
+Content-Type: application/json
+Authorization: Bearer &lt;token&gt;
+
+{
+  "subject":  { "type": "user", "id": "alice@example.com" },
+  "resource": { "type": "account", "id": "123" },
+  "action":   { "name": "can_read", "properties": { "method": "GET" } },
+  "context":  { "time": "1985-10-26T01:22-07:00" }
+}</code></pre>
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{ "decision": true }</code></pre>
+      <p>A deny that includes a reason in the response context:</p>
+<pre><code>{
+  "decision": false,
+  "context": {
+    "reason_user": { "en": "Accounts can only be read by their owner or a manager." }
+  }
+}</code></pre>
+      <p class="w3-small">The shape of <code>context</code> is up to the PDP. The example above is illustrative.</p>
+
+    </section>
+
+    <section class="w3-container section" id="evaluations">
+      <h2 class="w3-xxlarge w3-text-red"><b>Access Evaluations API (batch)</b></h2>
+
+      <p>Default path: <code>/access/v1/evaluations</code>. Top-level <code>subject</code>, <code>action</code>,
+        <code>resource</code> and <code>context</code> act as defaults that each item in <code>evaluations</code>
+        can override. Typical use: deciding which buttons to show in a UI with a single round trip.</p>
+<pre><code>{
+  "subject": { "type": "user", "id": "alice@example.com" },
+  "action":  { "name": "can_read" },
+  "options": { "evaluations_semantic": "execute_all" },
+  "evaluations": [
+    { "resource": { "type": "document", "id": "boxcarring.md" } },
+    { "resource": { "type": "document", "id": "subject-search.md" } },
+    { "action": { "name": "can_edit" }, "resource": { "type": "document", "id": "boxcarring.md" } }
+  ]
+}</code></pre>
+<pre><code>{
+  "evaluations": [
+    { "decision": true },
+    { "decision": false },
+    { "decision": false, "context": { "error": { "status": 404, "message": "Resource not found" } } }
+  ]
+}</code></pre>
+      <p><code>options.evaluations_semantic</code> controls execution:</p>
+      <ul>
+        <li><code>execute_all</code> (default): evaluate everything and return all decisions in request order.</li>
+        <li><code>deny_on_first_deny</code>: stop at the first deny. Useful when all checks must pass.</li>
+        <li><code>permit_on_first_permit</code>: stop at the first permit. Useful when any one check is enough.</li>
+      </ul>
+
+    </section>
+
+    <section class="w3-container section" id="search">
+      <h2 class="w3-xxlarge w3-text-red"><b>Search APIs: subject, resource and action search</b></h2>
+
+      <p>Search answers "who / what / which" questions without the N+1 problem of evaluating every item. Leave
+        out the <code>id</code> of the entity you are searching for and send only its <code>type</code>.</p>
+      <div class="table-wrap">
+        <table class="w3-table-all">
+          <thead><tr><th>API</th><th>Default path</th><th>Question</th></tr></thead>
+          <tbody>
+            <tr><td>Subject Search</td><td><code>/access/v1/search/subject</code></td><td>Which users can <em>read</em> account 123?</td></tr>
+            <tr><td>Resource Search</td><td><code>/access/v1/search/resource</code></td><td>Which accounts can Alice <em>read</em>?</td></tr>
+            <tr><td>Action Search</td><td><code>/access/v1/search/action</code></td><td>What can Alice do on account 123?</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Resource Search example</h3>
+<pre><code>POST /access/v1/search/resource
+{
+  "subject":  { "type": "user", "id": "alice@example.com" },
+  "action":   { "name": "can_read" },
+  "resource": { "type": "account" },
+  "page":     { "limit": 2 }
+}</code></pre>
+<pre><code>{
+  "page": { "next_token": "a3M9NDU2O3N6PTI=", "count": 2 },
+  "results": [
+    { "type": "account", "id": "123" },
+    { "type": "account", "id": "456" }
+  ]
+}</code></pre>
+      <p>Pagination: repeat the identical request with <code>"page": { "token": "&lt;next_token&gt;" }</code> until
+        <code>next_token</code> is an empty string. <code>count</code>, <code>total</code> and
+        <code>properties</code> are optional in the response <code>page</code> object.</p>
+
+    </section>
+
+    <section class="w3-container section" id="metadata">
+      <h2 class="w3-xxlarge w3-text-red"><b>PDP metadata and discovery</b></h2>
+
+      <p>A PDP publishes its configuration at <code>/.well-known/authzen-configuration</code>, placed between the
+        host and any path (for example <code>https://pdp.example.com/.well-known/authzen-configuration/tenant1</code>).</p>
+<pre><code>GET /.well-known/authzen-configuration HTTP/1.1
+Host: pdp.example.com
+
+{
+  "policy_decision_point": "https://pdp.example.com",
+  "access_evaluation_endpoint": "https://pdp.example.com/access/v1/evaluation",
+  "access_evaluations_endpoint": "https://pdp.example.com/access/v1/evaluations",
+  "search_subject_endpoint": "https://pdp.example.com/access/v1/search/subject",
+  "search_resource_endpoint": "https://pdp.example.com/access/v1/search/resource",
+  "search_action_endpoint": "https://pdp.example.com/access/v1/search/action"
+}</code></pre>
+      <ul>
+        <li><code>policy_decision_point</code> and <code>access_evaluation_endpoint</code> are required. Other
+          endpoints are optional; if one is absent, the PEP treats that API as unsupported.</li>
+        <li>Optional: <code>capabilities</code> (registered capability URNs) and <code>signed_metadata</code> (a JWT
+          whose values take precedence).</li>
+      </ul>
+
+    </section>
+
+    <section class="w3-container section" id="try">
+      <h2 class="w3-xxlarge w3-text-red"><b>Try it</b></h2>
+
+      <ul>
+        <li>Send requests to a live AuthZEN PDP at <a href="https://pdp.alfa.guide/">pdp.alfa.guide</a> (ALFA policies, by Axiomatics).</li>
+        <li>Read the normative text: <a href="https://openid.net/specs/authorization-api-1_0.html">Authorization API 1.0</a>.
+          Editors' draft: <a href="https://openid.github.io/authzen">openid.github.io/authzen</a>.</li>
+        <li>Find a PDP or PEP for your stack: <a href="/implementations">AuthZEN implementations</a>.</li>
+      </ul>
+
+    </section>
+
+  </main>
+
+  <footer class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px">
+    <p class="w3-center">© Axiomatics · <a href="/manifesto">Authorization Manifesto</a> ·
+      <a href="https://github.com/davidjbrossard/authzen.guide">Source on GitHub</a></p>
+  </footer>
+
+  <script>
+    function w3_open() {
+      document.getElementById("mySidebar").style.display = "block";
+      document.getElementById("myOverlay").style.display = "block";
+    }
+    function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+      document.getElementById("myOverlay").style.display = "none";
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AuthZEN Implementations: PDPs, API Gateways &amp; IdPs Supporting OpenID AuthZEN</title>
+  <meta name="description" content="Directory of OpenID AuthZEN implementations: policy decision points, API gateways and identity providers that support the Authorization API 1.0.">
+  <link rel="canonical" href="https://authzen.guide/implementations">
+  <meta name="author" content="David Brossard">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="theme-color" content="#f44336">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AuthZEN.guide">
+  <meta property="og:title" content="AuthZEN implementations">
+  <meta property="og:description" content="Directory of OpenID AuthZEN implementations: policy decision points, API gateways and identity providers that support the Authorization API 1.0.">
+  <meta property="og:url" content="https://authzen.guide/implementations">
+  <meta property="og:image" content="https://authzen.guide/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AuthZEN implementations">
+  <meta name="twitter:description" content="Directory of OpenID AuthZEN implementations: policy decision points, API gateways and identity providers that support the Authorization API 1.0.">
+  <meta name="twitter:image" content="https://authzen.guide/assets/og-image.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/w3.css">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AuthZEN.guide",
+          "item": "https://authzen.guide/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AuthZEN implementations",
+          "item": "https://authzen.guide/implementations"
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "headline": "AuthZEN implementations: PDPs, gateways and IdPs",
+      "description": "Directory of OpenID AuthZEN implementations: policy decision points, API gateways and identity providers that support the Authorization API 1.0.",
+      "author": {
+        "@type": "Person",
+        "@id": "https://authzen.guide/#david-brossard",
+        "name": "David Brossard"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://authzen.guide/#org",
+        "name": "Axiomatics"
+      },
+      "dateModified": "2026-11-03",
+      "mainEntityOfPage": "https://authzen.guide/implementations",
+      "isPartOf": {
+        "@id": "https://authzen.guide/#website"
+      },
+      "image": "https://authzen.guide/assets/og-image.png"
+    },
+    {
+      "@type": "ItemList",
+      "name": "OpenID AuthZEN implementations",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Axiomatics",
+          "url": "https://axiomatics.com/resources/reference-library/openid-authzen"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aserto / Topaz",
+          "url": "https://www.aserto.com/blog/authzen-gartner-iam-and-native-support-in-topaz"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Cerbos",
+          "url": "https://cerbos.dev/authzen"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "OpenFGA",
+          "url": "https://openfga.dev/docs/interacting/authzen"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Amazon Verified Permissions",
+          "url": "https://aws.amazon.com/blogs/security/how-to-support-openid-authzen-requests-with-amazon-verified-permissions"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "SGNL",
+          "url": "https://help.sgnl.ai/articles/protected-systems/protected-system-authzen/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "Keycloak",
+          "url": "https://www.keycloak.org/securing-apps/authzen-authorization"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "name": "Curity",
+          "url": "https://curity.io/resources/learn/authzen-authorization-manager/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "name": "cidaas",
+          "url": "https://www.cidaas.com/authzen-in-cidaas/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "name": "Gravitee Access Management",
+          "url": "https://documentation.gravitee.io/am/guides/authorization-engines/authzen"
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "name": "Traefik Hub",
+          "url": "https://doc.traefik.io/traefik-hub/api-gateway/guides/authzen-walkthrough"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+
+<body>
+
+  <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;"
+    id="mySidebar" aria-label="Main">
+    <br>
+    <button type="button" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft"
+      style="width:100%;font-size:22px">Close Menu</button>
+    <div class="w3-container">
+      <p class="w3-padding-64 w3-xlarge"><a href="/" style="text-decoration:none"><b>AuthZEN.guide</b></a></p>
+    </div>
+    <div class="w3-bar-block">
+      <a href="/" class="w3-bar-item w3-button w3-hover-white">Home</a>
+      <a href="/api" class="w3-bar-item w3-button w3-hover-white">API reference &amp; examples</a>
+      <a href="/implementations" aria-current="page" class="w3-bar-item w3-button w3-hover-white">Implementations</a>
+      <a href="/compare" class="w3-bar-item w3-button w3-hover-white">AuthZEN vs XACML, OPA, Cedar</a>
+      <a href="/#faq" class="w3-bar-item w3-button w3-hover-white">FAQ</a>
+      <a href="/manifesto" class="w3-bar-item w3-button w3-hover-white">Authorization Manifesto</a>
+      <a href="https://openid.net/specs/authorization-api-1_0.html" class="w3-bar-item w3-button w3-hover-white">Spec (1.0 Final)</a>
+      <a href="https://github.com/openid/authzen" class="w3-bar-item w3-button w3-hover-white">AuthZEN on GitHub</a>
+    </div>
+  </nav>
+
+  <header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
+    <button type="button" class="w3-button w3-red w3-margin-right" onclick="w3_open()" aria-label="Open menu">☰</button>
+    <span>AuthZEN.guide</span>
+  </header>
+
+  <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu"
+    id="myOverlay"></div>
+
+  <main class="w3-main">
+    <div class="w3-container" style="margin-top:80px">
+      <h1 class="w3-xxxlarge"><b>AuthZEN implementations: PDPs, gateways and IdPs</b></h1>
+      <p class="updated">By <a href="/#about">David Brossard</a> · Last updated <time datetime="2026-11-03">3 November 2026</time></p>
+      <hr class="w3-round rule">
+    </div>
+
+    <div class="w3-container">
+      <p class="lead">A directory of products and open-source projects that implement the OpenID AuthZEN
+        Authorization API, either as a <strong>PDP</strong> (decision point that answers AuthZEN requests) or as a
+        <strong>PEP</strong> (enforcement point such as an API gateway, IdP or application that calls one).</p>
+      <p>Missing or out of date? <a href="https://github.com/davidjbrossard/authzen.guide/issues">Open an issue</a>
+        with a link to public documentation.</p>
+    </div>
+
+    <section class="w3-container section" id="directory">
+      <h2 class="w3-xxlarge w3-text-red"><b>AuthZEN implementations</b></h2>
+
+      <div class="table-wrap">
+        <table class="w3-table-all">
+          <thead><tr><th>Product / project</th><th>Role</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><a href="https://axiomatics.com/resources/reference-library/openid-authzen">Axiomatics</a></td><td>PDP</td><td>Policy-based (ABAC) authorization platform using ALFA. Exposes AuthZEN endpoints; hosts the public demo PDP at pdp.alfa.guide.</td></tr>
+            <tr><td><a href="https://www.aserto.com/blog/authzen-gartner-iam-and-native-support-in-topaz">Aserto / Topaz</a></td><td>PDP</td><td>Open-source Topaz authorizer with native AuthZEN support.</td></tr>
+            <tr><td><a href="https://cerbos.dev/authzen">Cerbos</a></td><td>PDP</td><td>Open-source policy decision point with AuthZEN support.</td></tr>
+            <tr><td><a href="https://openfga.dev/docs/interacting/authzen">OpenFGA</a></td><td>PDP</td><td>Relationship-based (ReBAC) authorization engine with AuthZEN endpoints.</td></tr>
+            <tr><td><a href="https://aws.amazon.com/blogs/security/how-to-support-openid-authzen-requests-with-amazon-verified-permissions">Amazon Verified Permissions</a></td><td>PDP (via adapter)</td><td>Cedar-based service. AWS shows how to answer AuthZEN requests with it.</td></tr>
+            <tr><td><a href="https://help.sgnl.ai/articles/protected-systems/protected-system-authzen/">SGNL</a></td><td>PDP</td><td>Continuous access management platform. Supports AuthZEN-compliant protected systems.</td></tr>
+            <tr><td><a href="https://www.keycloak.org/securing-apps/authzen-authorization">Keycloak</a></td><td>IdP / PDP</td><td>Open-source IdP with AuthZEN authorization support.</td></tr>
+            <tr><td><a href="https://curity.io/resources/learn/authzen-authorization-manager/">Curity</a></td><td>IdP / PEP</td><td>Curity Identity Server AuthZEN Authorization Manager.</td></tr>
+            <tr><td><a href="https://www.cidaas.com/authzen-in-cidaas/">cidaas</a></td><td>IdP</td><td>CIAM platform supporting AuthZEN 1.0.</td></tr>
+            <tr><td><a href="https://documentation.gravitee.io/am/guides/authorization-engines/authzen">Gravitee Access Management</a></td><td>IdP / PEP</td><td>Gravitee AM can delegate authorization to an AuthZEN engine.</td></tr>
+            <tr><td><a href="https://doc.traefik.io/traefik-hub/api-gateway/guides/authzen-walkthrough">Traefik Hub</a></td><td>API gateway / MCP gateway PEP</td><td>Enforces AuthZEN decisions at the API and MCP gateway.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="w3-small">Listing order is not a ranking. Inclusion is based on publicly available documentation.
+        Conformance claims are each vendor's own. Last reviewed 3 November 2026.</p>
+
+    </section>
+
+    <section class="w3-container section" id="interop">
+      <h2 class="w3-xxlarge w3-text-red"><b>Interop results</b></h2>
+
+      <p>The working group runs public interops where PEPs and PDPs from different vendors exercise the same test
+        suite, including at Identiverse 2024 and Gartner IAM. Interop rounds have covered the evaluation API, the
+        Search APIs, API gateways and IdP integrations.</p>
+      <ul>
+        <li><a href="https://openid.net/authorization-interop-results/">OpenID Foundation: AuthZEN interop results</a></li>
+        <li><a href="/#talks">Interop talks and slides</a></li>
+      </ul>
+
+    </section>
+
+    <section class="w3-container section" id="guides">
+      <h2 class="w3-xxlarge w3-text-red"><b>Implementation guides</b></h2>
+
+      <ul>
+        <li><a href="/api">AuthZEN API reference with JSON examples</a></li>
+        <li><a href="https://auth0.com/blog/implementing-authzen-guide-openid-authorization-api">Auth0: Implementing the OpenID AuthZEN Authorization API</a></li>
+        <li><a href="https://doc.traefik.io/traefik-hub/mcp-gateway/guides/authzen-mcp-walkthrough">Traefik: AuthZEN for the MCP gateway</a></li>
+      </ul>
+
+    </section>
+
+  </main>
+
+  <footer class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px">
+    <p class="w3-center">© Axiomatics · <a href="/manifesto">Authorization Manifesto</a> ·
+      <a href="https://github.com/davidjbrossard/authzen.guide">Source on GitHub</a></p>
+  </footer>
+
+  <script>
+    function w3_open() {
+      document.getElementById("mySidebar").style.display = "block";
+      document.getElementById("myOverlay").style.display = "block";
+    }
+    function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+      document.getElementById("myOverlay").style.display = "none";
+    }
+  </script>
+
+</body>
+
+</html>

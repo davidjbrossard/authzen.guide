@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Authorization Manifesto: Externalized, Fine-Grained Authorization</title>
+  <meta name="description" content="A call to arms for application architects and developers to adopt externalized, fine-grained authorization and the OpenID AuthZEN standard.">
+  <link rel="canonical" href="https://authzen.guide/manifesto">
+  <meta name="author" content="David Brossard">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="theme-color" content="#f44336">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AuthZEN.guide">
+  <meta property="og:title" content="The Authorization Manifesto">
+  <meta property="og:description" content="A call to arms for application architects and developers to adopt externalized, fine-grained authorization and the OpenID AuthZEN standard.">
+  <meta property="og:url" content="https://authzen.guide/manifesto">
+  <meta property="og:image" content="https://authzen.guide/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Authorization Manifesto">
+  <meta name="twitter:description" content="A call to arms for application architects and developers to adopt externalized, fine-grained authorization and the OpenID AuthZEN standard.">
+  <meta name="twitter:image" content="https://authzen.guide/assets/og-image.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/w3.css">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AuthZEN.guide",
+          "item": "https://authzen.guide/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "The Authorization Manifesto",
+          "item": "https://authzen.guide/manifesto"
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "headline": "The Authorization Manifesto",
+      "description": "A call to arms for application architects and developers to adopt externalized, fine-grained authorization and the OpenID AuthZEN standard.",
+      "author": {
+        "@type": "Person",
+        "@id": "https://authzen.guide/#david-brossard",
+        "name": "David Brossard"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://authzen.guide/#org",
+        "name": "Axiomatics"
+      },
+      "dateModified": "2026-11-03",
+      "mainEntityOfPage": "https://authzen.guide/manifesto",
+      "isPartOf": {
+        "@id": "https://authzen.guide/#website"
+      },
+      "image": "https://authzen.guide/assets/og-image.png"
+    }
+  ]
+}
+  </script>
+</head>
+
+<body>
+
+  <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;"
+    id="mySidebar" aria-label="Main">
+    <br>
+    <button type="button" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft"
+      style="width:100%;font-size:22px">Close Menu</button>
+    <div class="w3-container">
+      <p class="w3-padding-64 w3-xlarge"><a href="/" style="text-decoration:none"><b>AuthZEN.guide</b></a></p>
+    </div>
+    <div class="w3-bar-block">
+      <a href="/" class="w3-bar-item w3-button w3-hover-white">Home</a>
+      <a href="/api" class="w3-bar-item w3-button w3-hover-white">API reference &amp; examples</a>
+      <a href="/implementations" class="w3-bar-item w3-button w3-hover-white">Implementations</a>
+      <a href="/compare" class="w3-bar-item w3-button w3-hover-white">AuthZEN vs XACML, OPA, Cedar</a>
+      <a href="/#faq" class="w3-bar-item w3-button w3-hover-white">FAQ</a>
+      <a href="/manifesto" aria-current="page" class="w3-bar-item w3-button w3-hover-white">Authorization Manifesto</a>
+      <a href="https://openid.net/specs/authorization-api-1_0.html" class="w3-bar-item w3-button w3-hover-white">Spec (1.0 Final)</a>
+      <a href="https://github.com/openid/authzen" class="w3-bar-item w3-button w3-hover-white">AuthZEN on GitHub</a>
+    </div>
+  </nav>
+
+  <header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
+    <button type="button" class="w3-button w3-red w3-margin-right" onclick="w3_open()" aria-label="Open menu">☰</button>
+    <span>AuthZEN.guide</span>
+  </header>
+
+  <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu"
+    id="myOverlay"></div>
+
+  <main class="w3-main">
+    <div class="w3-container" style="margin-top:80px">
+      <h1 class="w3-xxxlarge"><b>The Authorization Manifesto</b></h1>
+      <p class="updated">By <a href="/#about">David Brossard</a> · Last updated <time datetime="2026-11-03">3 November 2026</time></p>
+      <hr class="w3-round rule">
+    </div>
+
+    <section class="w3-container section" id="call">
+      <h2 class="w3-xxlarge w3-text-red"><b>Call to arms: championing externalized, fine-grained authorization</b></h2>
+
+      <p>Fellow application architects and developers,</p>
+      <p>Our digital landscape changes fast, and the need for robust, adaptive security has never been more
+        pressing. As custodians of software integrity and user trust, we must meet the challenge of modern
+        application development by embracing externalized, fine-grained authorization.</p>
+      <h3>Why this matters</h3>
+      <ul>
+        <li><strong>Enhanced security:</strong> Traditional role-based access control (RBAC) models often fall short
+          of the nuanced needs of today's complex applications. Fine-grained authorization defines precise
+          access controls based on attributes and contextual data, which reduces vulnerabilities and mitigates insider
+          threats.</li>
+        <li><strong>Agility and scalability:</strong> As applications grow and evolve, their security frameworks must
+          evolve too. Externalized authorization allows centralized management, so policies can be updated and
+          maintained without disrupting the application's core functionality.</li>
+        <li><strong>Compliance and governance:</strong> Fine-grained authorization provides the granularity needed to
+          enforce data privacy and protection regulations, so access controls align with legal mandates and
+          audit trails are robust.</li>
+        <li><strong>User experience:</strong> Users are granted access only to what they need, which reduces clutter and
+          confusion and improves productivity.</li>
+      </ul>
+      <h3>Taking action</h3>
+      <ul>
+        <li><strong>Educate and advocate:</strong> Share the benefits of externalized, fine-grained authorization with
+          your teams and stakeholders.</li>
+        <li><strong>Adopt best practices:</strong> Use attribute-based (ABAC) and policy-based (PBAC) access control,
+          guided by industry standards.</li>
+        <li><strong>Invest in tools and training:</strong> Give your teams the tools and knowledge they need to
+          implement fine-grained authorization.</li>
+        <li><strong>Collaborate and innovate:</strong> Encourage cross-functional teams to design secure, user-centric
+          applications together.</li>
+        <li><strong>Adopt OpenID AuthZEN:</strong> As a first step towards a successful externalized authorization
+          program, standardize how your applications call your authorization service with the
+          <a href="/api">AuthZEN Authorization API</a>.</li>
+      </ul>
+      <h3>Join the movement</h3>
+      <p>Let us unite as a community of forward-thinking architects and developers and champion externalized,
+        fine-grained authorization for a safer, more resilient digital future.
+        <a href="https://openid.net/wg/authzen/">Join the OpenID AuthZEN Working Group</a>.</p>
+      <p><em>Stay secure,<br>David Brossard, CTO Axiomatics and Co-chair, OpenID AuthZEN</em></p>
+
+    </section>
+
+  </main>
+
+  <footer class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px">
+    <p class="w3-center">© Axiomatics · <a href="/manifesto">Authorization Manifesto</a> ·
+      <a href="https://github.com/davidjbrossard/authzen.guide">Source on GitHub</a></p>
+  </footer>
+
+  <script>
+    function w3_open() {
+      document.getElementById("mySidebar").style.display = "block";
+      document.getElementById("myOverlay").style.display = "block";
+    }
+    function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+      document.getElementById("myOverlay").style.display = "none";
+    }
+  </script>
+
+</body>
+
+</html>

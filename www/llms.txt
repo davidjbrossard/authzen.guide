@@ -1,0 +1,27 @@
+# AuthZEN.guide
+
+> A practical guide to OpenID AuthZEN, the OpenID Foundation standard for externalized, fine-grained authorization. The Authorization API 1.0 (Final Specification, approved 12 January 2026) defines a JSON-over-HTTPS API that a Policy Enforcement Point (PEP) uses to ask a Policy Decision Point (PDP) whether a subject can perform an action on a resource in a given context. Maintained by David Brossard (CTO, Axiomatics; co-chair of the OpenID AuthZEN WG; editor of the Authorization API 1.0).
+
+Key facts:
+- Request: subject {type, id, properties?}, action {name, properties?}, resource {type, id, properties?}, context? → response: {decision: boolean, context?}
+- Default endpoints: /access/v1/evaluation, /access/v1/evaluations (batch), /access/v1/search/subject, /access/v1/search/resource, /access/v1/search/action
+- Discovery: /.well-known/authzen-configuration
+- Policy-language neutral: ALFA/XACML, Rego, Cedar or ReBAC engines can all serve AuthZEN.
+
+## Guide
+
+- [What is OpenID AuthZEN](https://authzen.guide/): overview, status, how it works, FAQ
+- [API reference with JSON examples](https://authzen.guide/api): evaluation, batch, search, PDP metadata
+- [Implementations](https://authzen.guide/implementations): PDPs, API gateways and IdPs that support AuthZEN
+- [AuthZEN vs XACML, OPA, Cedar, OpenFGA](https://authzen.guide/compare): how AuthZEN relates to policy languages and engines
+
+## Normative sources
+
+- [Authorization API 1.0 (Final)](https://openid.net/specs/authorization-api-1_0.html)
+- [OpenID AuthZEN Working Group](https://openid.net/wg/authzen/)
+- [AuthZEN on GitHub](https://github.com/openid/authzen)
+
+## Optional
+
+- [The Authorization Manifesto](https://authzen.guide/manifesto)
+- [Live AuthZEN PDP](https://pdp.alfa.guide/)

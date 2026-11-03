@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AuthZEN vs XACML, OPA (Rego), Cedar &amp; OpenFGA: How They Fit Together</title>
+  <meta name="description" content="How OpenID AuthZEN compares to XACML/ALFA, OPA/Rego, Cedar and OpenFGA: AuthZEN standardizes the authorization API, not the policy language.">
+  <link rel="canonical" href="https://authzen.guide/compare">
+  <meta name="author" content="David Brossard">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="theme-color" content="#f44336">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AuthZEN.guide">
+  <meta property="og:title" content="AuthZEN vs XACML, OPA, Cedar and OpenFGA">
+  <meta property="og:description" content="How OpenID AuthZEN compares to XACML/ALFA, OPA/Rego, Cedar and OpenFGA: AuthZEN standardizes the authorization API, not the policy language.">
+  <meta property="og:url" content="https://authzen.guide/compare">
+  <meta property="og:image" content="https://authzen.guide/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AuthZEN vs XACML, OPA, Cedar and OpenFGA">
+  <meta name="twitter:description" content="How OpenID AuthZEN compares to XACML/ALFA, OPA/Rego, Cedar and OpenFGA: AuthZEN standardizes the authorization API, not the policy language.">
+  <meta name="twitter:image" content="https://authzen.guide/assets/og-image.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/w3.css">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AuthZEN.guide",
+          "item": "https://authzen.guide/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AuthZEN vs XACML, OPA, Cedar and OpenFGA",
+          "item": "https://authzen.guide/compare"
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "headline": "AuthZEN vs XACML, OPA, Cedar and OpenFGA",
+      "description": "How OpenID AuthZEN compares to XACML/ALFA, OPA/Rego, Cedar and OpenFGA: AuthZEN standardizes the authorization API, not the policy language.",
+      "author": {
+        "@type": "Person",
+        "@id": "https://authzen.guide/#david-brossard",
+        "name": "David Brossard"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://authzen.guide/#org",
+        "name": "Axiomatics"
+      },
+      "dateModified": "2026-11-03",
+      "mainEntityOfPage": "https://authzen.guide/compare",
+      "isPartOf": {
+        "@id": "https://authzen.guide/#website"
+      },
+      "image": "https://authzen.guide/assets/og-image.png"
+    }
+  ]
+}
+  </script>
+</head>
+
+<body>
+
+  <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;"
+    id="mySidebar" aria-label="Main">
+    <br>
+    <button type="button" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft"
+      style="width:100%;font-size:22px">Close Menu</button>
+    <div class="w3-container">
+      <p class="w3-padding-64 w3-xlarge"><a href="/" style="text-decoration:none"><b>AuthZEN.guide</b></a></p>
+    </div>
+    <div class="w3-bar-block">
+      <a href="/" class="w3-bar-item w3-button w3-hover-white">Home</a>
+      <a href="/api" class="w3-bar-item w3-button w3-hover-white">API reference &amp; examples</a>
+      <a href="/implementations" class="w3-bar-item w3-button w3-hover-white">Implementations</a>
+      <a href="/compare" aria-current="page" class="w3-bar-item w3-button w3-hover-white">AuthZEN vs XACML, OPA, Cedar</a>
+      <a href="/#faq" class="w3-bar-item w3-button w3-hover-white">FAQ</a>
+      <a href="/manifesto" class="w3-bar-item w3-button w3-hover-white">Authorization Manifesto</a>
+      <a href="https://openid.net/specs/authorization-api-1_0.html" class="w3-bar-item w3-button w3-hover-white">Spec (1.0 Final)</a>
+      <a href="https://github.com/openid/authzen" class="w3-bar-item w3-button w3-hover-white">AuthZEN on GitHub</a>
+    </div>
+  </nav>
+
+  <header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
+    <button type="button" class="w3-button w3-red w3-margin-right" onclick="w3_open()" aria-label="Open menu">☰</button>
+    <span>AuthZEN.guide</span>
+  </header>
+
+  <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu"
+    id="myOverlay"></div>
+
+  <main class="w3-main">
+    <div class="w3-container" style="margin-top:80px">
+      <h1 class="w3-xxxlarge"><b>AuthZEN vs XACML, OPA, Cedar and OpenFGA</b></h1>
+      <p class="updated">By <a href="/#about">David Brossard</a> · Last updated <time datetime="2026-11-03">3 November 2026</time></p>
+      <hr class="w3-round rule">
+    </div>
+
+    <div class="w3-container">
+      <p class="lead"><strong>Short answer:</strong> AuthZEN is an <em>API standard</em>. XACML/ALFA, Rego, Cedar
+        and OpenFGA models are mainly <em>policy languages or engines</em>. They are complementary: any of these engines can
+        sit behind an AuthZEN endpoint, so applications integrate once and the policy technology stays swappable.</p>
+    </div>
+
+    <section class="w3-container section" id="table">
+      <h2 class="w3-xxlarge w3-text-red"><b>Comparison at a glance</b></h2>
+
+      <div class="table-wrap">
+        <table class="w3-table-all">
+          <thead><tr><th></th><th>What it standardizes</th><th>Steward</th><th>Model</th><th>Relationship to AuthZEN</th></tr></thead>
+          <tbody>
+            <tr><td><strong>OpenID AuthZEN</strong></td><td>The PEP↔PDP API (JSON over HTTPS), batch, search, discovery</td><td>OpenID Foundation</td><td>Any (language-neutral)</td><td>n/a</td></tr>
+            <tr><td><strong>XACML / ALFA</strong></td><td>Policy language, architecture (PEP/PDP/PIP/PAP) and request/response format</td><td>OASIS (XACML); ALFA by Axiomatics</td><td>ABAC / PBAC</td><td>XACML defined the architecture AuthZEN builds on. ALFA/XACML PDPs can expose AuthZEN.</td></tr>
+            <tr><td><strong>OPA / Rego</strong></td><td>A general-purpose policy engine and language with its own REST API</td><td>CNCF project</td><td>Policy-as-code</td><td>OPA can be wrapped or extended to answer AuthZEN requests.</td></tr>
+            <tr><td><strong>Cedar</strong></td><td>Policy language and evaluation semantics</td><td>Open source, originated at AWS</td><td>ABAC + RBAC</td><td>Cedar-based services such as Amazon Verified Permissions can answer AuthZEN requests.</td></tr>
+            <tr><td><strong>OpenFGA</strong></td><td>Relationship (Zanzibar-style) authorization engine and modeling language</td><td>CNCF project</td><td>ReBAC</td><td>OpenFGA exposes AuthZEN endpoints.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <section class="w3-container section" id="xacml">
+      <h2 class="w3-xxlarge w3-text-red"><b>AuthZEN vs XACML</b></h2>
+
+      <p>XACML (OASIS) standardized the externalized authorization <em>architecture</em> (PEP, PDP, PIP, PAP), a
+        policy language, and a request/response format, later with JSON and REST profiles. AuthZEN keeps the
+        PEP/PDP split but deliberately standardizes only the wire API, with a deliberately small
+        subject/action/resource/context shape, plus batch and search operations modern applications need. If you
+        run an XACML or ALFA PDP, AuthZEN is the developer-friendly front door to it.</p>
+
+    </section>
+
+    <section class="w3-container section" id="opa">
+      <h2 class="w3-xxlarge w3-text-red"><b>AuthZEN vs OPA (Rego)</b></h2>
+
+      <p>OPA is a policy engine. Its Data API is OPA-specific. AuthZEN makes the call site vendor-neutral: a gateway
+        or app that speaks AuthZEN can switch between OPA-based, Cedar-based or ALFA-based PDPs without code changes.</p>
+
+    </section>
+
+    <section class="w3-container section" id="cedar">
+      <h2 class="w3-xxlarge w3-text-red"><b>AuthZEN vs Cedar</b></h2>
+
+      <p>Cedar is a policy language. Cedar's principal/action/resource/context model maps naturally to AuthZEN's
+        subject/action/resource/context, which makes Cedar engines straightforward AuthZEN PDPs.</p>
+
+    </section>
+
+    <section class="w3-container section" id="openfga">
+      <h2 class="w3-xxlarge w3-text-red"><b>AuthZEN vs OpenFGA and Zanzibar-style ReBAC</b></h2>
+
+      <p>ReBAC engines answer "does user X have relation R to object Y?". That question maps onto an AuthZEN
+        evaluation, and the AuthZEN Search APIs map onto ReBAC list operations such as "list objects".</p>
+
+    </section>
+
+    <section class="w3-container section" id="next">
+      <h2 class="w3-xxlarge w3-text-red"><b>Where to go next</b></h2>
+
+      <ul>
+        <li><a href="/api">AuthZEN API reference with JSON examples</a></li>
+        <li><a href="/implementations">Products that implement AuthZEN</a></li>
+        <li><a href="https://openid.net/specs/authorization-api-1_0.html">Authorization API 1.0 specification</a></li>
+      </ul>
+
+    </section>
+
+  </main>
+
+  <footer class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px">
+    <p class="w3-center">© Axiomatics · <a href="/manifesto">Authorization Manifesto</a> ·
+      <a href="https://github.com/davidjbrossard/authzen.guide">Source on GitHub</a></p>
+  </footer>
+
+  <script>
+    function w3_open() {
+      document.getElementById("mySidebar").style.display = "block";
+      document.getElementById("myOverlay").style.display = "block";
+    }
+    function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+      document.getElementById("myOverlay").style.display = "none";
+    }
+  </script>
+
+</body>
+
+</html>

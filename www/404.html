@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found | AuthZEN.guide</title>
+  <meta name="description" content="Page not found.">
+  <meta name="author" content="David Brossard">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#f44336">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AuthZEN.guide">
+  <meta property="og:title" content="Page not found">
+  <meta property="og:description" content="Page not found.">
+  <meta property="og:url" content="https://authzen.guide/404">
+  <meta property="og:image" content="https://authzen.guide/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Page not found">
+  <meta name="twitter:description" content="Page not found.">
+  <meta name="twitter:image" content="https://authzen.guide/assets/og-image.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/w3.css">
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+
+<body>
+
+  <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;"
+    id="mySidebar" aria-label="Main">
+    <br>
+    <button type="button" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft"
+      style="width:100%;font-size:22px">Close Menu</button>
+    <div class="w3-container">
+      <p class="w3-padding-64 w3-xlarge"><a href="/" style="text-decoration:none"><b>AuthZEN.guide</b></a></p>
+    </div>
+    <div class="w3-bar-block">
+      <a href="/" class="w3-bar-item w3-button w3-hover-white">Home</a>
+      <a href="/api" class="w3-bar-item w3-button w3-hover-white">API reference &amp; examples</a>
+      <a href="/implementations" class="w3-bar-item w3-button w3-hover-white">Implementations</a>
+      <a href="/compare" class="w3-bar-item w3-button w3-hover-white">AuthZEN vs XACML, OPA, Cedar</a>
+      <a href="/#faq" class="w3-bar-item w3-button w3-hover-white">FAQ</a>
+      <a href="/manifesto" class="w3-bar-item w3-button w3-hover-white">Authorization Manifesto</a>
+      <a href="https://openid.net/specs/authorization-api-1_0.html" class="w3-bar-item w3-button w3-hover-white">Spec (1.0 Final)</a>
+      <a href="https://github.com/openid/authzen" class="w3-bar-item w3-button w3-hover-white">AuthZEN on GitHub</a>
+    </div>
+  </nav>
+
+  <header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
+    <button type="button" class="w3-button w3-red w3-margin-right" onclick="w3_open()" aria-label="Open menu">☰</button>
+    <span>AuthZEN.guide</span>
+  </header>
+
+  <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu"
+    id="myOverlay"></div>
+
+  <main class="w3-main">
+    <div class="w3-container" style="margin-top:80px">
+      <h1 class="w3-xxxlarge"><b>Page not found</b></h1>
+      <hr class="w3-round rule">
+    </div>
+
+    <div class="w3-container">
+      <p class="lead">That page does not exist. Try one of these:</p>
+      <ul>
+        <li><a href="/">What is OpenID AuthZEN?</a></li>
+        <li><a href="/api">AuthZEN API reference and JSON examples</a></li>
+        <li><a href="/implementations">AuthZEN implementations</a></li>
+        <li><a href="/compare">AuthZEN vs XACML, OPA, Cedar and OpenFGA</a></li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px">
+    <p class="w3-center">© Axiomatics · <a href="/manifesto">Authorization Manifesto</a> ·
+      <a href="https://github.com/davidjbrossard/authzen.guide">Source on GitHub</a></p>
+  </footer>
+
+  <script>
+    function w3_open() {
+      document.getElementById("mySidebar").style.display = "block";
+      document.getElementById("myOverlay").style.display = "block";
+    }
+    function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+      document.getElementById("myOverlay").style.display = "none";
+    }
+  </script>
+
+</body>
+
+</html>
